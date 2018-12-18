@@ -19,7 +19,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '40vw',
-    height: '15vw'
+    height: '30vh',
+    boxShadow: '7px 7px 17px -4px rgba(0,0,0,0.75)'
   }
 };
 

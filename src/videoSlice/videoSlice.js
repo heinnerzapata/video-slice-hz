@@ -1,17 +1,15 @@
-import React , { Component } from 'react';
-import { Grid, Row , Col } from 'react-flexbox-grid';
+import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import ClipsList from './containers/clipsList/clipsList';
-import Typography from '@material-ui/core/Typography'
+import VideoHandler from './containers/videoHandler/videoHandler';
 
 class VideoSlice extends Component {
   render() {
-    return(
+    return (
       <Grid>
         <Row>
           <Col xs={12} lg={6}>
-            <Typography variant="title" color="inherit">
-                React & Material-UI Sample Application
-            </Typography>
+            <VideoHandler />
           </Col>
           <Col xs={12} lg={6}>
             <ClipsList />
@@ -20,6 +18,6 @@ class VideoSlice extends Component {
       </Grid>
     );
   }
-} 
+}
 
 export default VideoSlice;
