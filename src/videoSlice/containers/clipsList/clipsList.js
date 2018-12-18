@@ -7,13 +7,25 @@ import _ from 'lodash';
 
 import Clip from './../../components/clip/clip';
 import PlayAll from './../../components/playAll/playAll';
-import defaultClips from './defaultClips.json';
 import ModalCreate from './../modalCreate/modalCreate';
-import { NAME_CHAR_RE } from 'xmlchars/xml/1.0/ed5';
+
+import { connect } from "react-redux";
+import { setPlayList } from '../../../store/actions/videoSlice';
+
+const defaultClip = {
+  "id": 1,
+  "name": "Full video",
+  "start": 0,
+  "end": 0,
+  "fixed": true,
+  "tags": [
+    "full"
+  ]
+};
 
 const initSlider = {
   name: '',
-  sliderValues: [25, 75]
+  sliderValues: [5, 10]
 }
 
 class ClipsList extends Component {
@@ -22,14 +34,28 @@ class ClipsList extends Component {
 
     this.state = {
       search: '',
-      clips: defaultClips.clips,
-      filteredClips: defaultClips.clips,
-      maxId: defaultClips.clips[0].id,
+      clips: [defaultClip],
+      filteredClips: [defaultClip],
+      maxId: defaultClip.id,
       openModal: {
         state: false,
         clip: null
-      }
+      },
+      maxRange: 0
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const vidDuration = nextProps.videoSliceReducer.videoDuration;
+    if(this.props.videoSliceReducer.videoDuration !== vidDuration) {
+      this.setState({ 
+        clips: [{...defaultClip,
+        end : vidDuration.toString().split('.')[0] }],
+        maxRange : vidDuration.toString().split('.')[0]
+      }, () => {
+        this.filterClips(this.state.search);
+      });
+    }
   }
 
   handleChange = name => event => {
@@ -56,8 +82,9 @@ class ClipsList extends Component {
     });
   }
 
-  handlePlay = name => {
-    console.log(name + 'play');
+  handlePlay = id => {
+    const clip = this.getClipById(id);
+    this.props.dispatch(setPlayList([clip]));
   }
 
   handleDelete = id => {
@@ -164,7 +191,8 @@ class ClipsList extends Component {
                            subtitle={'test'}
                            currentNames={this.getCurrentNames()}
                            maxId={ this.state.maxId }
-                           handleSave={this.handleSave} />
+                           handleSave={this.handleSave}
+                           maxRange={this.state.maxRange} />
             </Col>
           </Row>
           <Row>
@@ -176,4 +204,4 @@ class ClipsList extends Component {
   }
 }
 
-export default ClipsList;
+export default connect(state => state)(ClipsList);

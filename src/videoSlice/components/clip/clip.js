@@ -45,7 +45,7 @@ const Clip = (props) => {
           <Col xs={6} md={6} lg={1}>
            <IconButton color="primary"
                        className={classes.clip.button}
-                       onClick={ () => { props.handlePlay(props.data.name) } }>
+                       onClick={ () => { props.handlePlay(props.data.id) } }>
             <PlayCircleFilled className={classes.clip__icon}/>
            </IconButton>
           </Col>
@@ -55,8 +55,8 @@ const Clip = (props) => {
             </Typography>
           </Col>
           <Col xs={6} md={6} lg={3}>
-            <Typography variant="title" color="inherit">
-              {props.data.start} / {props.data.end}
+            <Typography variant="subheading" color="inherit">
+              00:{props.data.start} / 00:{props.data.end}
             </Typography>
           </Col>
           <Col xs={6} md={6} lg={3}>

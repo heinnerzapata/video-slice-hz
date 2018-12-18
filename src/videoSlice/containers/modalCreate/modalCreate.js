@@ -19,6 +19,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '40vw',
+    minHeight: '200px',
     height: '30vh',
     boxShadow: '7px 7px 17px -4px rgba(0,0,0,0.75)'
   }
@@ -38,7 +39,7 @@ const styles = {
 class ModalCreate extends Component {
   state = {
     name: '',
-    sliderValues: [25, 75],
+    sliderValues: [5, 10],
     isEditting: false,
     currentClipId: 0
   }
@@ -121,6 +122,11 @@ class ModalCreate extends Component {
     this.setState({ isEditting: false });
   }
 
+  getTimeValue(value) {
+    const addZero = (+value < 10) ? '0' : '';
+    return `00:${value}${addZero}`;
+  }
+
   render() {
     const {
       classes
@@ -166,7 +172,7 @@ class ModalCreate extends Component {
                   <Slider defaultValue={10}
                     range={true}
                     min={0}
-                    max={100}
+                    max={this.props.maxRange}
                     defaultValue={this.state.sliderValues}
                     onChange={this.changeHandler}>
                   </Slider>
@@ -175,12 +181,12 @@ class ModalCreate extends Component {
                   <Row around="xs">
                     <Col xs={1}>
                       <Typography variant="subtitle1" color="inherit">
-                        {this.state.sliderValues[0]}
+                       { this.getTimeValue(this.state.sliderValues[0]) }
                       </Typography>
                     </Col>
                     <Col xs={1}>
                       <Typography variant="subtitle1" color="inherit">
-                        {this.state.sliderValues[1]}
+                      { this.getTimeValue(this.state.sliderValues[1]) }
                       </Typography>
                     </Col>
                   </Row>

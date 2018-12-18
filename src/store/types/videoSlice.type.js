@@ -1,0 +1,2 @@
+export const SET_VIDEO_DURATION = 'SET_VIDEO_DURATION';
+export const SET_PLAY_LIST = 'SET_PLAY_LIST';

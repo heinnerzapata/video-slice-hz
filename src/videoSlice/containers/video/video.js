@@ -18,27 +18,37 @@ class Video extends Component {
     this.video = element
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.play !== nextProps.play && nextProps.play) {
+      this.video.load();
+      this.video.play();
+    }
+  }
+
   render() {
     const {
       handleLoadedMetadata,
       handleTimeUpdate,
       handleSeeking,
-      handleSeeked
+      handleSeeked,
+      handleEnded,
+      handleTimeUpdated
     } = this.props;
     const { classes } = this.props;
     return (
       <div className={classes.video_container}>
         <video className={classes.video_container__item}
           id="video"
-          controls
           autoPlay={this.props.autoplay}
           ref={this.setRef}
           onLoadedMetadata={handleLoadedMetadata}
           onTimeUpdate={handleTimeUpdate}
           onSeeking={handleSeeking}
-          onSeeked={handleSeeked}>
+          onEnded={handleEnded}
+          onSeeked={handleSeeked}
+          onTimeUpdate={handleTimeUpdated}>
           <source
-            src={this.props.src}
+            src={`${this.props.src}#t=${this.props.start},${this.props.end}`}
             type="video/mp4" />
           Your browser does not support HTML5 video.
       </video>
