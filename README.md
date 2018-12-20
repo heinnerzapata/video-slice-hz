@@ -11,7 +11,7 @@ IMPORTANT: Please make sure you have installed:
 Once you have those ones running correctly, please run the next commands:
 
 ```shell
-git clone =https://github.com/heinnerzapata/video-slice-hz.git
+git clone https://github.com/heinnerzapata/video-slice-hz.git
 ```
 
 and then, just run:
