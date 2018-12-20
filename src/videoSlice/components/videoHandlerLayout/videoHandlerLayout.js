@@ -9,7 +9,8 @@ const styles = {
     borderRadius: '6px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'relative'
   }
 };
 

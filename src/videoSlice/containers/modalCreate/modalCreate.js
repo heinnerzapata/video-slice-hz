@@ -54,60 +54,42 @@ class ModalCreate extends Component {
     });
   };
 
-  setNewValues = clip => {
-    alert('ok');
-  };
-
   isCurrentNameinList() {
     return _.some(this.props.currentNames, item => { return item.toLowerCase() === this.state.name.toLowerCase() });
   }
 
   notAvailableName = () => {
     return this.isCurrentNameinList() ||
-           this.state.name.trim() === '';
+      this.state.name.trim() === '';
   }
 
-  componentWillReceiveProps (newProps) {
-    if(newProps.openModal && newProps.openModal.clip) {
-      this.setState({ name: newProps.openModal.clip.name,
-                      sliderValues: [ newProps.openModal.clip.start, newProps.openModal.clip.end ],
-                      isEditting: true,
-                      currentClipId: newProps.openModal.clip.id
-                    });
+  componentWillReceiveProps(newProps) {
+    if (newProps.openModal && newProps.openModal.clip) {
+      this.setState({
+        name: newProps.openModal.clip.name,
+        sliderValues: [newProps.openModal.clip.start, newProps.openModal.clip.end],
+        isEditting: true,
+        currentClipId: newProps.openModal.clip.id
+      });
     }
   }
 
   isCurrentNameSameThanEdit() {
     let result;
-    if(this.props.openModal && this.props.openModal.clip) {
+    if (this.props.openModal && this.props.openModal.clip) {
       result = this.state.name.toLowerCase() === this.props.openModal.clip.name.toLowerCase() &&
-                this.state.name.trim() !== ''; 
+        this.state.name.trim() !== '';
     }
-    else
-    {
+    else {
       result = false;
     }
     return result;
   }
 
-  afterOpenModal = () => {
-    // if(this.props.openModal.clip) {
-    //   this.setState({ name: this.props.openModal.clip.name,
-    //                   sliderValues: [this.props.openModal.clip.start, this.props.openModal.clip.end] });
-    // }
-    // if(this.props.openModal.clip) {
-    // console.log(this.props.openModal.clip.name);
-    // console.log(this.state);
-    // }
-
-    console.log('ok');
-  }
-
-
   saveClip = () => {
     console.log(this.state.currentClipId);
     this.props.handleSave({
-      id: (!this.state.isEditting) ? this.props.maxId + 1 : this.state.currentClipId ,
+      id: (!this.state.isEditting) ? this.props.maxId + 1 : this.state.currentClipId,
       name: this.state.name,
       start: this.state.sliderValues[0],
       end: this.state.sliderValues[1],
@@ -116,7 +98,7 @@ class ModalCreate extends Component {
     }, !this.state.isEditting);
     this.setState({
       name: '',
-      sliderValues: [25, 75]
+      sliderValues: [5, 10]
     });
     this.props.handleCloseModal();
     this.setState({ isEditting: false });
@@ -169,7 +151,7 @@ class ModalCreate extends Component {
             <Col xs={6}>
               <Row>
                 <Col xs={12}>
-                  <Slider defaultValue={10}
+                  <Slider
                     range={true}
                     min={0}
                     max={this.props.maxRange}
@@ -181,12 +163,12 @@ class ModalCreate extends Component {
                   <Row around="xs">
                     <Col xs={1}>
                       <Typography variant="subtitle1" color="inherit">
-                       { this.getTimeValue(this.state.sliderValues[0]) }
+                        {this.getTimeValue(this.state.sliderValues[0])}
                       </Typography>
                     </Col>
                     <Col xs={1}>
                       <Typography variant="subtitle1" color="inherit">
-                      { this.getTimeValue(this.state.sliderValues[1]) }
+                        {this.getTimeValue(this.state.sliderValues[1])}
                       </Typography>
                     </Col>
                   </Row>
@@ -196,7 +178,7 @@ class ModalCreate extends Component {
           </Row>
           <Row middle="xs" end="xs">
             <Col xs={12}>
-              { ((!this.notAvailableName()) || (this.state.isEditting) ) ?
+              {((!this.notAvailableName()) || (this.state.isEditting)) ?
                 <Button variant="contained"
                   color="primary"
                   className={classes.modalCreate__button_save}
@@ -208,7 +190,7 @@ class ModalCreate extends Component {
                   variant="subtitle1"
                   color="inherit"
                   className={classes.modalCreate__button_save}>
-                 invalid name or already exist !!
+                  invalid name or already exist !!
                 </Typography>
               }
             </Col>

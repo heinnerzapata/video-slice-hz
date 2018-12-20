@@ -68,6 +68,7 @@ class ClipsList extends Component {
         this.filterClips(event.target.value);
         break;
       }
+      default: break;
     }
   };
 
@@ -103,8 +104,7 @@ class ClipsList extends Component {
   }
 
   handleCloseModal = () => {
-    this.setState({ openModal: { state: false, clip: null } });
-    this.state.defaultValues = initSlider;
+    this.setState({ openModal: { state: false, clip: null, defaultValues: initSlider.sliderValues } });
   };
 
   handleOpenModal = () => {
@@ -133,6 +133,7 @@ class ClipsList extends Component {
         maxId: this.getMaxClipsId()
       });
       this.filterClips(this.state.search);
+      localStorage.setItem('clips', JSON.stringify(this.state.clips));
     });
   }
 
@@ -149,6 +150,10 @@ class ClipsList extends Component {
     this.setState({clips: newClips}, () => {
       this.filterClips(this.state.search);
     });
+  }
+
+  handlePlayAll = () => {
+    this.props.dispatch(setPlayList(this.state.filteredClips));
   }
 
   render() {
@@ -180,7 +185,7 @@ class ClipsList extends Component {
           </Row>
           <Row center="xs" middle="xs">
             <Col xs={12} lg={6}>
-              <PlayAll />
+              <PlayAll handlePlayAll={this.handlePlayAll} />
             </Col>
             <Col xs={12} lg={6}>
               <Button variant="contained" color="primary" onClick={this.handleOpenModal}>

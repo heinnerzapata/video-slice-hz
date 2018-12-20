@@ -16,7 +16,7 @@ const styles = {
   clip__card: {
     minHeight: 30,
     margintop: 5,
-    paddingTop:5,
+    paddingTop: 5,
     marginBottom: 5
   },
   clip__icon: {
@@ -34,52 +34,52 @@ const styles = {
 };
 
 const Clip = (props) => {
-  const { 
+  const {
     classes
   } = props;
   return (
     <div className={classes.clip}>
       <Card className={classes.clip__card}>
-      <CardContent>
-        <Row center="xs" middle="xs">
-          <Col xs={6} md={6} lg={1}>
-           <IconButton color="primary"
-                       className={classes.clip.button}
-                       onClick={ () => { props.handlePlay(props.data.id) } }>
-            <PlayCircleFilled className={classes.clip__icon}/>
-           </IconButton>
-          </Col>
-          <Col xs={6} md={6} lg={5}>
-            <Typography variant="title" color="inherit">
-             {props.data.name}
-            </Typography>
-          </Col>
-          <Col xs={6} md={6} lg={3}>
-            <Typography variant="subheading" color="inherit">
-              00:{props.data.start} / 00:{props.data.end}
-            </Typography>
-          </Col>
-          <Col xs={6} md={6} lg={3}>
-            {! props.data.fixed &&
-              <Row>
-                <Col xs={6}>
-                  <IconButton color="primary" className={classes.clip.button}>
-                    <Edit className={classes.clip__icon}
-                          onClick={ () => { props.handleEdit(props.data.id) } }/>
-                  </IconButton>
-                </Col>
-                <Col xs={6}>
-                  <IconButton color="primary" className={classes.clip.button}>
-                    <Delete className={classes.clip__icon}
-                            onClick={ () => { props.handleDelete(props.data.id) } }/>
-                  </IconButton>
-                </Col>
-              </Row>
-            }
-          </Col>
-        </Row>
-      </CardContent>
-    </Card>
+        <CardContent>
+          <Row center="xs" middle="xs">
+            <Col xs={6} md={6} lg={1}>
+              <IconButton color="primary"
+                className={classes.clip.button}
+                onClick={() => { props.handlePlay(props.data.id) }}>
+                <PlayCircleFilled className={classes.clip__icon} />
+              </IconButton>
+            </Col>
+            <Col xs={6} md={6} lg={5}>
+              <Typography variant="title" color="inherit">
+                {props.data.name}
+              </Typography>
+            </Col>
+            <Col xs={6} md={6} lg={3}>
+              <Typography variant="subheading" color="inherit">
+                00:{props.data.start} / 00:{props.data.end}
+              </Typography>
+            </Col>
+            <Col xs={6} md={6} lg={3}>
+              {!props.data.fixed &&
+                <Row>
+                  <Col xs={6}>
+                    <IconButton color="primary" className={classes.clip.button}>
+                      <Edit className={classes.clip__icon}
+                        onClick={() => { props.handleEdit(props.data.id) }} />
+                    </IconButton>
+                  </Col>
+                  <Col xs={6}>
+                    <IconButton color="primary" className={classes.clip.button}>
+                      <Delete className={classes.clip__icon}
+                        onClick={() => { props.handleDelete(props.data.id) }} />
+                    </IconButton>
+                  </Col>
+                </Row>
+              }
+            </Col>
+          </Row>
+        </CardContent>
+      </Card>
     </div>
   );
 };

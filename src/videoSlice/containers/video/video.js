@@ -19,7 +19,7 @@ class Video extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.play !== nextProps.play && nextProps.play) {
+    if (this.props.play !== nextProps.play && nextProps.play) {
       this.video.load();
       this.video.play();
     }
@@ -28,9 +28,6 @@ class Video extends Component {
   render() {
     const {
       handleLoadedMetadata,
-      handleTimeUpdate,
-      handleSeeking,
-      handleSeeked,
       handleEnded,
       handleTimeUpdated
     } = this.props;
@@ -42,10 +39,7 @@ class Video extends Component {
           autoPlay={this.props.autoplay}
           ref={this.setRef}
           onLoadedMetadata={handleLoadedMetadata}
-          onTimeUpdate={handleTimeUpdate}
-          onSeeking={handleSeeking}
           onEnded={handleEnded}
-          onSeeked={handleSeeked}
           onTimeUpdate={handleTimeUpdated}>
           <source
             src={`${this.props.src}#t=${this.props.start},${this.props.end}`}

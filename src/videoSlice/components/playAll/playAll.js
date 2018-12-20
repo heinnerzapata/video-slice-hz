@@ -29,7 +29,8 @@ const PlayAll = (props) => {
 
   return (
     <IconButton color="primary"
-                className={classes.playAll}>
+                className={classes.playAll}
+                onClick={ () => { props.handlePlayAll() } }>
       <PlayCircleFilled className={classes.playAll__icon}/>
     </IconButton>
   );
